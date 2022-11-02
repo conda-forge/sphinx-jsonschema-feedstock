@@ -1,5 +1,5 @@
 {% set name = "sphinx-jsonschema" %}
-{% set version = "1.19.1" %}
+{% set version = "1.15" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/sphinx-jsonschema-{{ version }}.tar.gz
-  sha256: b2385fe1c7acf2e759152aefed0cb17c920645b2a75c9934000c9c528e7d53c1
+  sha256: 7fcc7bbec1d4f9cc9d8c564a59a3f6dad8878b30933fd644e20ede29b1ce3e3f
 
 build:
   number: 0
