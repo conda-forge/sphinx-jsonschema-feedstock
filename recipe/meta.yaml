@@ -7,20 +7,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/sphinx-jsonschema-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/sphinx-jsonschema-{{ version }}.tar.gz
   sha256: b2385fe1c7acf2e759152aefed0cb17c920645b2a75c9934000c9c528e7d53c1
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - docutils
     - jsonpointer
     - pyyaml
@@ -35,6 +35,7 @@ test:
   requires:
     - pip
   # There are currently no functional unit tests ( https://github.com/lnoor/sphinx-jsonschema/issues/56 ).
+    - python {{ python_min }}
 
 about:
   home: https://github.com/lnoor/sphinx-jsonschema
