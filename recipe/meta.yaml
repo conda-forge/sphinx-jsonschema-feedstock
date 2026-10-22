@@ -1,5 +1,5 @@
 {% set name = "sphinx-jsonschema" %}
-{% set version = "1.19.2" %}
+{% set version = "1.20.0" %}
 
 
 package:
@@ -7,8 +7,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name | replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: 1a48954217c2b3c6759c89b9ddd2c8e5b668b8730564e0283b009f23932be150
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/{{ name | replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 472631960973368790afef549325b5faeab1a9ed205f5f14b753c4c2d62045ba
 
 build:
   number: 0
