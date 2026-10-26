@@ -1,51 +1,56 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
 schema_version: 1
 
 context:
-  name: sphinx-jsonschema
   version: "1.20.1"
+  # a known "latest" python for pip check instead of "*" (any pythong)
+  python_check_max: "3.15"
 
 package:
-  name: ${{ name|lower }}
+  name: sphinx-jsonschema
   version: ${{ version }}
 
 source:
-  url: https://files.pythonhosted.org/packages/source/${{ name[0] }}/${{ name }}/${{ name | replace('-', '_') }}-${{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/s/sphinx-jsonschema/sphinx_jsonschema-${{ version }}.tar.gz
   sha256: 56d84e2051d7221d9089f11d113abe45581aa5e1a3e9c2bf99f96f5e5696b4f2
 
 build:
   number: 0
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv
+  script:
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check --check-build-dependencies
 
 requirements:
   host:
     - pip
-    - python ${{ python_min }}
+    - python ${{ python_min }}.*
+    - setuptools >=77
   run:
-    - python >=${{ python_min }}
     - docutils
     - jsonpointer
+    - python >=${{ python_min }}
     - pyyaml
     - requests
     - sphinx
 
 tests:
-  - requirements:
-      run:
-        - pip
-        - python ${{ python_min }}
-    script:
-      - pip check
-      - python -c "import importlib; importlib.import_module('sphinx-jsonschema')"
+  - python:
+      imports: sphinx-jsonschema
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - ${{ python_check_max }}.*
 
 about:
   summary: Sphinx extension to display JSON Schema
   license: GPL-3.0-only
   license_file: LICENSE
-  homepage: https://github.com/lnoor/sphinx-jsonschema
+  homepage: https://pypi.org/project/sphinx-jsonschema
+  repository: https://github.com/lnoor/sphinx-jsonschema
+  documentation: https://sphinx-jsonschema.readthedocs.io
 
 extra:
   recipe-maintainers:
     - mikemhenry
     - maresb
-
+    - bollwyvl
