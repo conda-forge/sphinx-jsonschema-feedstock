@@ -3,11 +3,15 @@ About sphinx-jsonschema-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/sphinx-jsonschema-feedstock/blob/main/LICENSE.txt)
 
-Home: https://github.com/lnoor/sphinx-jsonschema
+Home: https://pypi.org/project/sphinx-jsonschema
 
 Package license: GPL-3.0-only
 
 Summary: Sphinx extension to display JSON Schema
+
+Development: https://github.com/lnoor/sphinx-jsonschema
+
+Documentation: https://sphinx-jsonschema.readthedocs.io/
 
 Current build status
 ====================
@@ -187,6 +191,7 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@bollwyvl](https://github.com/bollwyvl/)
 * [@maresb](https://github.com/maresb/)
 * [@mikemhenry](https://github.com/mikemhenry/)
 

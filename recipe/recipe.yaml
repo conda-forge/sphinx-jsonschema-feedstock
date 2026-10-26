@@ -34,6 +34,11 @@ requirements:
     - sphinx
 
 tests:
+  - package_contents:
+      strict: true
+      site_packages:
+        - sphinx-jsonschema/**
+        - sphinx-jsonschema-${{ version }}.dist-info/**
   - python:
       imports: sphinx-jsonschema
       pip_check: true
