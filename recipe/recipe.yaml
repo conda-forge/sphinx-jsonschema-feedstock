@@ -1,49 +1,51 @@
-{% set name = "sphinx-jsonschema" %}
-{% set version = "1.20.1" %}
+schema_version: 1
 
+context:
+  name: sphinx-jsonschema
+  version: "1.20.1"
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: ${{ name|lower }}
+  version: ${{ version }}
 
 source:
-  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/{{ name | replace('-', '_') }}-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/${{ name[0] }}/${{ name }}/${{ name | replace('-', '_') }}-${{ version }}.tar.gz
   sha256: 56d84e2051d7221d9089f11d113abe45581aa5e1a3e9c2bf99f96f5e5696b4f2
 
 build:
   number: 0
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: ${{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python {{ python_min }}
+    - python ${{ python_min }}
   run:
-    - python >={{ python_min }}
+    - python >=${{ python_min }}
     - docutils
     - jsonpointer
     - pyyaml
     - requests
     - sphinx
 
-test:
-  commands:
-    - pip check
-    # I need to use importlib due to the - character in the package name.
-    - python -c "import importlib; importlib.import_module('sphinx-jsonschema')"
-  requires:
-    - pip
-  # There are currently no functional unit tests ( https://github.com/lnoor/sphinx-jsonschema/issues/56 ).
-    - python {{ python_min }}
+tests:
+  - requirements:
+      run:
+        - pip
+        - python ${{ python_min }}
+    script:
+      - pip check
+      - python -c "import importlib; importlib.import_module('sphinx-jsonschema')"
 
 about:
-  home: https://github.com/lnoor/sphinx-jsonschema
   summary: Sphinx extension to display JSON Schema
   license: GPL-3.0-only
   license_file: LICENSE
+  homepage: https://github.com/lnoor/sphinx-jsonschema
 
 extra:
   recipe-maintainers:
     - mikemhenry
     - maresb
+
