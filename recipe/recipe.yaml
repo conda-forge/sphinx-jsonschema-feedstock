@@ -38,13 +38,23 @@ tests:
       strict: true
       site_packages:
         - sphinx-jsonschema/**
-        - sphinx-jsonschema-${{ version }}.dist-info/**
+        - sphinx_jsonschema-${{ version }}.dist-info/**
   - python:
-      imports: sphinx-jsonschema
+      # unsurprisingly, this doesn't work
+      # imports: sphinx-jsonschema
       pip_check: true
       python_version:
         - ${{ python_min }}.*
         - ${{ python_check_max }}.*
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+    script:
+      interpreter: python
+      content: |-
+        from unittest.mock import MagicMock
+        mod = __import__("sphinx-jsonschema")
+        assert mod.setup(MagicMock())["version"] == '${{ version }}'
 
 about:
   summary: Sphinx extension to display JSON Schema
